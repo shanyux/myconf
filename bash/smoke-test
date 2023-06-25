@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+#
+# Copyright (C) distroy
+#
+
+cmd=(grep "start server succ. $1" /root/go/src/git.garena.com/shopee/marketing/ad_delivery_platform/log/daemon.log)
+
+echo "${cmd[@]}"
+
+test $("${cmd[@]}" | wc -l) -gt 0
+exit $?

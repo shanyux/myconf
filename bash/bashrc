@@ -1,0 +1,29 @@
+# .bashrc
+#
+# Copyright (C) distroy
+#
+
+
+pushd $(dirname $BASH_SOURCE) &>/dev/null
+LD_BASH=$(pwd)
+LD_ROOT="$(dirname "${LD_BASH}")"
+
+
+for (( i = 0; i <= 100; ++i )); do
+    if [ ! -d $LD_BASH/lib/$i ]; then
+        continue
+    fi
+    for j in $(echo $LD_BASH/lib/$i/*.bash); do
+        source $j
+    done
+done
+
+for i in $(echo $LD_BASH/completion/*.bash); do
+    source $i
+done
+unset i j
+
+
+popd &>/dev/null
+
+test -d vendor.bak && test ! -e vendor && ln -sv vendor.bak vendor
